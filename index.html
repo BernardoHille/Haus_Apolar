@@ -156,6 +156,10 @@
 		  z-index: 1000;
 		  max-width: 180px;
 		}
+		.video-player .plyr video {
+		    object-fit: cover !important;
+		    border-radius: 25px !important;
+		}
 	</style>
   </head>
   <body>
@@ -175,7 +179,7 @@
 	<div id="scanning-overlay" class="hidden"><img src="pride_scan_frame.svg" id="scan_svg"></div>
     <a-scene mindar-image="imageTargetSrc: apolar_targets.mind; filterMinCF:0.001; filterBeta: 0.001; warmupTolerance: 5; missTolerance: 5; uiScanning: #scanning-overlay;" device-orientation-permission-ui="enabled: false" xr-mode-ui="enabled: false">
 		<a-assets>
-			<video id="video" src="Apolar_editado.mp4" autoplay loop muted crossorigin="anonymous" playsinline style="border-radius: 25px;"></video>
+			<video id="video" src="Apolar_editado.mp4" autoplay loop muted crossorigin="anonymous" playsinline></video>
 		</a-assets>
 		<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       
