@@ -100,6 +100,7 @@
     	   video.pause();
 		   console.log("Video Pause");
 		   overlay_start.style.display = 'block';
+		   lostTimeout = setTimeout(restartVideo, 3000);
     	};
 
 	if (video.paused) {
