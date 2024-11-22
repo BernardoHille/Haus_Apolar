@@ -12,6 +12,7 @@
 	sceneEl.addEventListener('loaded', function () {
 	  arSystem = sceneEl.systems["mindar-image-system"];
 	});
+	const reproduzirVidsOverlay = document.querySelector('#overlay');
 	const exampleTarget = document.querySelector('#example-target');
 	const examplePlane = document.querySelector('#example-plane');
 	const startButton = document.querySelector("#example-start-button");
@@ -21,6 +22,8 @@
 	const unpauseButton = document.querySelector("#example-unpause-button");
 	const video = document.getElementById('video'); // Constante de vídeo
 	const scan_overlay = document.getElementById('scan_svg'); // Constante do scan overlay
+	const overlay_start = document.getElementById('overlay-start');
+	const play_button = document.getElementById('botao_clique');
 	let lostTimeout;
 	
 	/*
@@ -76,14 +79,40 @@
 	  console.log("Video Mutado")
 	  scan_overlay.style.display = 'block'; // Quando o target é encontrado o overlay aparece novamente
 	  console.log("scan overlay block")
-	  lostTimeout = setTimeout(restartVideo, 10000);
+	  lostTimeout = setTimeout(restartVideo, 7000);
 	  console.log("Timeout iniciado");
+	  overlay_start.style.display = 'none';
+	  play_button.style.display = 'none';
 	});
 
 	function restartVideo() {
 	  video.currentTime = 0;
 	  console.log("Video reiniciado")
 	}
+
+
+	reproduzirVidsOverlay.addEventListener("click", event => {
+		if (video.paused) {
+    		video.play();
+			console.log("Video Play");
+			overlay_start.style.display = 'none';
+    	} else {
+    	   video.pause();
+		   console.log("Video Pause");
+		   overlay_start.style.display = 'block';
+    	};
+
+	if (video.paused) {
+		overlay_start.style.display = 'block';
+		play_button.style.display = 'block';
+
+    } else if (video.play) {
+	   overlay_start.style.display = 'none';
+	   play_button.style.display = 'none';
+
+    };
+
+	});
 
 	/*
 	***
@@ -101,6 +130,28 @@
       });
     </script>
 	<style>
+		#overlay-start {
+		  position: fixed; /* Sit on top of the page content */
+		  display: block; /* Hidden by default */
+		  width: 100%; /* Full width (cover the whole page) */
+		  height: 100%; /* Full height (cover the whole page) */
+		  top: 0;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  z-index: 9999; /* Specify a stack order in case you're using a different order for other elements */
+		  cursor: pointer; /* Add a pointer on hover */
+		  background-color: rgba(0,0,0,0.7);
+		  -webkit-tap-highlight-color: transparent;
+		} 
+		#botao_clique {
+		  position: fixed;       /* Fixa a imagem na tela */
+		  top: 40%;              /* Posiciona a imagem no centro vertical */
+		  left: 50%;             /* Posiciona a imagem no centro horizontal */
+		  transform: translate(-50%, -50%); /* Ajusta para centralizar totalmente */
+		  width:100%;
+		  max-width: 180px;
+		}
 		#overlay {
 		  position: fixed; /* Sit on top of the page content */
 		  display: block; /* Hidden by default */
@@ -110,10 +161,11 @@
 		  left: 0;
 		  right: 0;
 		  bottom: 0;
-		  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+		  z-index: 99; /* Specify a stack order in case you're using a different order for other elements */
 		  cursor: pointer; /* Add a pointer on hover */
+		  -webkit-tap-highlight-color: transparent;
 		} 
-		#text{
+		#text {
 		  position: absolute;
 		  top: 50%;
 		  left: 50%;
@@ -122,7 +174,7 @@
 		  transform: translate(-50%,-50%);
 		  -ms-transform: translate(-50%,-50%);
 		}
-		#logo{
+		#logo {
 		  position: fixed;       /* Deixa a imagem fixa na tela */
 		  width: 35%;            /* Tamanho da imagem */
 		  bottom: 11.5%;             /* Alinha a imagem na parte inferior */
@@ -130,7 +182,7 @@
 		  transform: translateX(-50%); /* Ajusta para centralizar totalmente */
 		  max-width: 200px;
 		}
-		#scan_svg{
+		#scan_svg {
 		  position: fixed;       /* Fixa a imagem na tela */
 		  top: 35%;              /* Posiciona a imagem no centro vertical */
 		  left: 50%;             /* Posiciona a imagem no centro horizontal */
@@ -138,7 +190,7 @@
 		  width:60%;
 		  max-width: 300px;
 		}
-		#acessar_site{
+		#acessar_site {
 		  position: fixed;       /* Deixa a imagem fixa na tela */
 		  width: 80%;            /* Tamanho da imagem */
 		  bottom: 25%;           /* Alinha a imagem na parte inferior */
@@ -147,7 +199,7 @@
 		  z-index: 1000;
 		  max-width: 300px;
 		}
-		#feito_por_aeon{
+		#feito_por_aeon {
 		  position: fixed;       /* Deixa a imagem fixa na tela */
 		  width: 100%;            /* Tamanho da imagem */
 		  bottom: 1%;           /* Alinha a imagem na parte inferior */
@@ -159,6 +211,8 @@
 	</style>
   </head>
   <body>
+	<div id="overlay-start" onclick="document.getElementById('overlay-start').style.display = 'none'; document.getElementById('botao_clique').style.display = 'none'; video.play();"><img src="clique.svg" id="botao_clique"></img></div>
+	<div id="overlay">
 	<!--
 	***
 	Div dos botões linkados a scripts de debug
