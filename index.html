@@ -223,10 +223,12 @@
 			}
 
 			#logo {
-				max-width: 120px;
-				bottom: 1%;
-				left: 15%;  
-				transform: translateX(-50%);
+			  position: fixed;       /* Deixa a imagem fixa na tela */
+			  width: 35%;            /* Tamanho da imagem */
+			  bottom: 1%;             /* Alinha a imagem na parte inferior */
+			  left: 13%;             /* Centraliza horizontalmente */
+			  transform: translateX(-50%); /* Ajusta para centralizar totalmente */
+			  max-width: 120px;
 			}
 
 			#scan_svg {
@@ -235,17 +237,6 @@
 			}
     	}
 
-		/* For Tablets */
-		@media screen and (min-width: 480px) {
-			#logo {
-			  position: fixed;       /* Deixa a imagem fixa na tela */
-			  width: 35%;            /* Tamanho da imagem */
-			  bottom: 1%;             /* Alinha a imagem na parte inferior */
-			  left: 13%;             /* Centraliza horizontalmente */
-			  transform: translateX(-50%); /* Ajusta para centralizar totalmente */
-			  max-width: 120px;
-			}
-		}
 	</style>
   </head>
   <body>
